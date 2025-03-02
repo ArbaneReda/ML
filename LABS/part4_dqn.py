@@ -9,10 +9,10 @@ import os
 from collections import deque
 import cv2
 
-# ✅ Désactivation du mode eager pour compatibilité avec TensorFlow 1.x
+# Désactivation du mode eager pour compatibilité avec TensorFlow 1.x
 tf.compat.v1.disable_eager_execution()
 
-# ✅ Paramètres d'entraînement améliorés
+# Paramètres d'entraînement améliorés
 batch_size = 32
 y = 0.99  
 startE = 1  
@@ -29,15 +29,15 @@ path = "./dqn_model"
 if not os.path.exists(path):
     os.makedirs(path)
 
-# ✅ Chargement de l’environnement gridworld
+# Chargement de l’environnement gridworld
 from gridworld import gameEnv
 
 env = gameEnv(partial=False, size=5)
 action_size = env.actions
 
-# ✅ Classe Experience Replay
+# Classe Experience Replay
 class ExperienceBuffer:
-    def __init__(self, buffer_size=100000):  # Augmenté pour plus de diversité
+    def __init__(self, buffer_size=100000):  
         self.buffer = deque(maxlen=buffer_size)
     
     def add(self, experience):
@@ -46,13 +46,13 @@ class ExperienceBuffer:
     def sample(self, size):
         return random.sample(self.buffer, size)
 
-# ✅ Normalisation des états
+# Normalisation des états
 def processState(state):
     frame_resized = cv2.resize(state, (84, 84))
     frame_normalized = frame_resized.astype(np.float32) / 255.0
     return frame_normalized  # Garder en 3D
 
-# ✅ Mise à jour progressive du réseau cible
+# Mise à jour progressive du réseau cible
 def updateTargetGraph(tfVars, tau):
     total_vars = len(tfVars)
     op_holder = [tfVars[idx + total_vars // 2].assign(
@@ -64,7 +64,7 @@ def updateTarget(op_holder, sess):
     for op in op_holder:
         sess.run(op)
 
-# ✅ Réseau de neurones convolutif (Dueling DQN)
+# Réseau de neurones convolutif (Dueling DQN)
 class QNetwork:
     def __init__(self, h_size, action_size):
         self.scalarInput = tf.compat.v1.placeholder(shape=[None, 84, 84, 3], dtype=tf.float32)
@@ -85,11 +85,11 @@ class QNetwork:
         self.Advantage = tf.matmul(streamA, self.AW)
         self.Value = tf.matmul(streamV, self.VW)
 
-        # ✅ Correction du calcul de Qout
+        # Correction du calcul de Qout
         self.Qout = self.Value + (self.Advantage - tf.reduce_mean(self.Advantage, axis=1, keepdims=True))
         self.predict = tf.argmax(self.Qout, axis=1)
 
-        # ✅ Perte et optimisation
+        # Perte et optimisation
         self.targetQ = tf.compat.v1.placeholder(shape=[None], dtype=tf.float32)
         self.actions = tf.compat.v1.placeholder(shape=[None], dtype=tf.int32)
         self.actions_onehot = tf.one_hot(self.actions, action_size, dtype=tf.float32)
@@ -108,12 +108,12 @@ trainables = tf.compat.v1.trainable_variables()
 targetOps = updateTargetGraph(trainables, tau)
 myBuffer = ExperienceBuffer()
 
-# ✅ Politique d'exploration améliorée
+# Politique d'exploration améliorée
 epsilon = startE
 total_steps = 0
 rewards_list = []
 
-# ✅ Fonction d'affichage en temps réel
+# Fonction d'affichage en temps réel avec suppression après affichage
 def plot_rewards(rewards):
     plt.figure(figsize=(12,6))
     plt.plot(rewards, label="Reward per episode", alpha=0.7)
@@ -122,7 +122,8 @@ def plot_rewards(rewards):
     plt.legend()
     plt.grid()
     plt.show(block=False)
-    plt.pause(0.1)
+    plt.pause(2)  # Laisse le graphique affiché 2 secondes avant suppression
+    plt.close()  # Ferme la figure pour éviter d'en accumuler trop
 
 with tf.compat.v1.Session() as sess:
     sess.run(init)
@@ -153,7 +154,7 @@ with tf.compat.v1.Session() as sess:
                 Q1 = sess.run(mainQN.Qout, feed_dict={mainQN.scalarInput: np.array(next_states_mb)})
                 Q2 = sess.run(targetQN.Qout, feed_dict={targetQN.scalarInput: np.array(next_states_mb)})
 
-                # ✅ Correction définitive pour Double Q-Learning
+                # Correction définitive pour Double Q-Learning
                 best_action_indexes = np.argmax(Q1, axis=1)
                 doubleQ = np.take_along_axis(Q2, np.expand_dims(best_action_indexes, axis=1), axis=1).squeeze()
 
@@ -171,7 +172,7 @@ with tf.compat.v1.Session() as sess:
         if episode % 100 == 0:
             plot_rewards(rewards_list)  # Mise à jour du graphique
 
-        # ✅ Politique d'exploration améliorée (progressive)
+        # Politique d'exploration améliorée (progressive)
         if epsilon > endE:
             epsilon = max(endE, epsilon * 0.999)
 

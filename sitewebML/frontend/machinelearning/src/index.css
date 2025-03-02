@@ -1,0 +1,13 @@
+/* Style global de l'application */
+body {
+  background-color: #1a1a1a; 
+  color: #00ffcc; 
+  font-family: "Fira Code", monospace;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  padding: 20px;
+  text-align: center;
+}

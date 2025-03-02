@@ -1,0 +1,13 @@
+gym
+numpy
+tensorflow
+matplotlib
+ttkbootstrap
+opencv-python
+cv2
+threading
+time
+os
+random
+collections
+itertools

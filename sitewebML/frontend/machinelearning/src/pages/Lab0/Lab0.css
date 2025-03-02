@@ -1,0 +1,115 @@
+.lab0-container {
+  text-align: center;
+  padding: 60px;
+  background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+  color: #00ffcc;
+  min-height: 100vh;
+}
+
+.lab0-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  letter-spacing: 1.5px;
+}
+
+.lab0-intro {
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  color: #b3f6e8;
+}
+
+.lab0-highlight {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.lab0-button {
+  display: inline-block;
+  background-color: #00ffcc;
+  color: #1a1a1a;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background 0.15s ease-in-out, transform 0.1s ease-in-out;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  margin-top: 20px;
+}
+
+.lab0-button:hover {
+  background-color: #ffcc00;
+  transform: scale(1.07);
+}
+
+.lab0-status {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+.lab0-logs {
+  margin-top: 40px;
+  text-align: left;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lab0-subtitle {
+  font-size: 24px;
+  color: #00ffcc;
+  margin-bottom: 15px;
+}
+
+.lab0-log-container {
+  background: rgba(26, 26, 26, 0.9);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 5px 15px rgba(0, 255, 204, 0.3);
+  height: 250px;
+  overflow-y: auto;
+}
+
+.lab0-log {
+  font-size: 16px;
+  color: #b3f6e8;
+  margin-bottom: 5px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.lab0-image-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.lab0-image {
+  width: 80%;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 255, 204, 0.3);
+}
+
+/* Scrollbar personnalisée */
+.lab0-log-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lab0-log-container::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+.lab0-log-container::-webkit-scrollbar-thumb {
+  background: #00ffcc;
+  border-radius: 10px;
+}
+
+.lab0-log-container::-webkit-scrollbar-thumb:hover {
+  background: #ffcc00;
+}
