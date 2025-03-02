@@ -9,6 +9,7 @@ Ce projet implémente différentes méthodes d'apprentissage par renforcement su
 - `part4_dqn.py` → Implémentation d'un **Double DQN**, une version améliorée du DQN pour éviter certaines erreurs d’apprentissage.
 - `gridworld.py` → Code pour générer un environnement personnalisé, utilisé dans le **lab4**.
 - `requirements.txt` → Liste des bibliothèques Python nécessaires à l'exécution du projet.
+- `run_experiments.py` → Script permettant d'exécuter les expériences dans l'ordre automatiquement.
 
 ---
 
@@ -17,8 +18,8 @@ Ce projet implémente différentes méthodes d'apprentissage par renforcement su
 ### 📥 1. Cloner le projet
 
 ```bash
- git clone <lien-du-repo-github>
- cd <nom-du-repo>
+git clone <lien-du-repo-github>
+cd <nom-du-repo>
 ```
 
 ### 📦 2. Installer les dépendances
@@ -73,9 +74,23 @@ Ce script implémente un **Double DQN**, une version améliorée du DQN classiqu
 python part4_dqn.py
 ```
 
-📌 **Important :** 
+📌 **Important :**
 - L'entraînement est **beaucoup plus long**, car il utilise un réseau de neurones profond et un buffer d’expérience.
 - L'environnement utilisé est **gridworld.py**, une grille personnalisée où l’agent doit naviguer en évitant des obstacles.
+
+---
+
+### 🔹 **Exécution Automatique des Expériences**
+
+Plutôt que d'exécuter les scripts un par un, vous pouvez utiliser le script `run_experiments.py`, qui installe les dépendances et exécute chaque script dans l'ordre.
+
+```bash
+python run_experiments.py
+```
+
+📌 **Ne fermez pas les fenêtres des interfaces affichées lors de l'exécution des scripts !**
+- Les fermer peut **provoquer des erreurs** ou **arrêter le programme**.
+- Si vous utilisez `run_experiments.py`, **laissez-le s'exécuter jusqu'au bout**. Si vous interrompez un algorithme pour passer au suivant, cela risque de ne pas fonctionner correctement.
 
 ---
 
@@ -89,8 +104,9 @@ python part4_dqn.py
 
 ## 📝 Conclusion
 
-Ce projet illustre comment un agent peut apprendre à **prendre des décisions intelligentes** en utilisant différentes approches d’apprentissage par renforcement. 
+Ce projet illustre comment un agent peut apprendre à **prendre des décisions intelligentes** en utilisant différentes approches d’apprentissage par renforcement.
 
 La **Q-Table** est efficace pour les petits environnements, tandis que le **Q-Network** et le **Double DQN** permettent d’étendre cette approche à des scénarios plus complexes.
 
 Bon entraînement ! 🚀
+
